@@ -10,7 +10,7 @@ form.addEventListener('submit', (e) => {
     let html = `Loading...`
     output.innerHTML = html
     if(!adress.value) return output.innerHTML = 'The adress cannot be empty'
-    fetch(`http://localhost:3000/weather?adress=${adress.value}`)
+    fetch(`/weather?adress=${adress.value}`)
     .then(res => res.json())
     .then(data => {
         if(data.error) 
