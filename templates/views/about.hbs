@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/information-button.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>About</title>
+    <style>
+        .cont{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-height: 500px;
+        }
+        .flexing{
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            margin: 50px;
+            flex-basis: 380px;
+        }
+    </style>
+</head>
+<body>
+    {{>nav}}
+    <div class="cont">
+        <h1>{{title}}</h1> 
+        <div class="flexing">
+            <h2>Learning Backend development</h2>
+            <div class="pic">
+                <img src="images/download.jpg" alt="profile pic">
+            </div> 
+        </div>
+        <div>Created by {{author}}</div>
+    </div>
+    {{>foot this}}
+</body>
+</html>
