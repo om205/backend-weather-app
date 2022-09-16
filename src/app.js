@@ -44,7 +44,7 @@ app.get('/weather', (req, res) => {
     forecast(req.query.adress, (error, {location, current, forecast} = {}) => {
         if(error) return res.send({error})
         res.send({
-            forecast: `It is currently ${current.temp_c}°C outside in ${req.query.adress}. There is ${forecast.forecastday[0].day.daily_chance_of_rain}% chance of rain today.`,
+            forecast: `It is currently ${current.temp_c}°C outside in ${req.query.adress}.<br>There is ${forecast.forecastday[0].day.daily_chance_of_rain}% chance of rain today.<br>Minimum Temperature ${forecast.forecastday[0].day.mintemp_c}°C<br>Today's Maximum Temperature: ${forecast.forecastday[0].day.maxtemp_c}°C.`,
             location: `${location.name}, ${location.region}, ${location.country}`,
         })
     })
