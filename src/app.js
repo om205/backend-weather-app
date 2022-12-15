@@ -7,7 +7,7 @@ const app = express();
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 hbs.registerPartials(partialsPath)
 
@@ -30,21 +30,26 @@ app.get('/about', (req, res) => res.render('about', {
 }))
 
 app.get('/help', (req, res) => res.render('help', {
-    helpText: 'This is help message',
+    helpText: 'Currently we do not support this feature but will be launching soon. Stay Tuned..',
     title: 'Help',
     author: 'Om Dubey',
     version: '1.0.0' 
 }))
 
 app.get('/weather', (req, res) => {
-    if(!req.query.adress)
+    if(!req.query.adress && (!req.query.lat && !req.query.lon))
     return res.send({
         error: 'You must provide the adress!'
     })
-    forecast(req.query.adress, (error, {location, current, forecast} = {}) => {
+    const adress = {
+        adress: req.query.adress,
+        latitude: req.query.lat,
+        longitude: req.query.lon
+    }
+    forecast(adress, (error, {location, current, forecast} = {}) => {
         if(error) return res.send({error})
         res.send({
-            forecast: `It is currently ${current.temp_c}°C outside in ${req.query.adress}.<br>There is ${forecast.forecastday[0].day.daily_chance_of_rain}% chance of rain today.<br>Minimum Temperature ${forecast.forecastday[0].day.mintemp_c}°C<br>Today's Maximum Temperature: ${forecast.forecastday[0].day.maxtemp_c}°C.`,
+            forecast: `It is currently ${current.temp_c}°C outside in ${location.name}.<br>There is ${forecast.forecastday[0].day.daily_chance_of_rain}% chance of rain today.<br>Minimum Temperature ${forecast.forecastday[0].day.mintemp_c}°C<br>Today's Maximum Temperature: ${forecast.forecastday[0].day.maxtemp_c}°C.`,
             location: `${location.name}, ${location.region}, ${location.country}`,
         })
     })

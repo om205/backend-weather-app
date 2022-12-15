@@ -1,8 +1,9 @@
 const request = require('request');
-const apikey = `aa71f9d4be8b4972b40100908221609`
+const apikey = `99ebd7160dcb4588a2d72033221512`
 
 const forecast = (location, callback) => {
-    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apikey}&q=${encodeURIComponent(location)}&aqi=no`;
+    const queryString = location.adress ? `q=${encodeURIComponent(location.adress)}&aqi=no` : `q=${location.latitude},${location.longitude}&aqi=no`
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${apikey}&${queryString}`;
     request({ url, json: true }, (error, { body }={}) => {
         if(error)
         callback('Not able to connect to weather API');

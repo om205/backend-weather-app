@@ -12,9 +12,15 @@
     {{>nav}}
     <div class="container">
         <h1>{{title}}</h1>
-        <input type="text">
-        <button>get help</button>
+        <form action="/help/support">
+            <input name="query" type="text" id="helpInput">
+            <button type="submit" id="help-btn">get help</button>
+        </form>
         <div>{{helpText}}</div>
+        <div class="my-4">
+            <h3>Contact Developer</h3>
+            <h5>drop an email at: 20je0649@pe.iitism.ac.in</h5>
+        </div>
     </div>
     {{>foot this}}
 </body>
